@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="script/dist/normalize.css"/>
+    <link rel="stylesheet" href="script/dist/gridstack.css"/>
+    <link rel="stylesheet" href="script/dist/gridstack-extra.css"/>
+    <link rel="stylesheet" href="script/dist/style.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/game.css">
+    <title>Salvo - GamePlayers</title>
+</head>
+
+<body>
+<div id="app" class="container-fluid">
+    <div class="row mt-2">
+        <div class="col-12 alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{game_state}}</strong>
+        </div>
+    </div>
+    <div class="row mt-2">
+
+        <div class="col-sm-2">
+            <button id="startPlay-btn" type="button" class="btn btn-sm btn-warning">
+                PLACE THE SHIPS!
+            </button>
+            <button id="logout-btn" type="button" class="btn btn-sm btn-primary" onclick="logout()">Logout</button>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-4">
+            <div id="player">
+                <span>Gameplayer: {{viewer}}</span>
+            </div>
+            <div class="gameboard gameboardSize">
+                <table class="table table-bordered ">
+                    <tbody>
+                    <tr v-for="item in coordenadaY">
+                        <td class="celda" :id="item+1"></td>
+                        <td class="celda" :id="item+2"></td>
+                        <td class="celda" :id="item+3"></td>
+                        <td class="celda" :id="item+4"></td>
+                        <td class="celda" :id="item+5"></td>
+                        <td class="celda" :id="item+6"></td>
+                        <td class="celda" :id="item+7"></td>
+                        <td class="celda" :id="item+8"></td>
+                        <td class="celda" :id="item+9"></td>
+                        <td class="celda" :id="item+10"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="grid-ships gameboard">
+                <!-- div que usa la librería gridstack grid-stack-10 se indica que son 10 columnas-->
+                <div id="grid" class="grid-stack grid-stack-10 data-gs-max-row-10">
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <table class="table table-bordered ">
+                <tr><th colspan="4">{{viewer}}</th></tr>
+                <tr><th>Turn</th><th>Hits</th><th>skins</th></tr>
+                <tr v-for="item in hitsTable">
+                    <td>{{item.turn}}</td>
+                    <td>{{item.hits.length}}</td>
+                    <td>{{item.skins.map(x => x.type).join(', ')}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-2">
+            <table class="table table-bordered ">
+                <tr><th colspan="4">{{oponente}}</th></tr>
+                <tr><th>Turn</th><th>Hits</th><th>skins</th></tr>
+                <tr v-for="item in hitsTableOpp">
+                    <td>{{item.turn}}</td>
+                    <td>{{item.hits.length}}</td>
+                    <td>{{item.skins.map(x => x.type).join(', ')}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-4">
+            <div id="opponent">
+                <span>Opponent: {{oponente}}</span>
+            </div>
+            <div class=" gridSalvo gameboard gameboardSize">
+                <table class="table table-bordered ">
+                    <tbody>
+                    <tr v-for="item in coordenadaY">
+                        <td v-on:click="vshoot($event)" class="celda" :id="'s'+item+1"></td>
+                        <td v-on:click="vshoot($event)" class="celda" :id="'s'+item+2"></td>
+                        <td v-on:click="vshoot($event)" class="celda" :id="'s'+item+3"></td>
+                        <td v-on:click="vshoot($event)" class="celda" :id="'s'+item+4"></td>
+                        <td v-on:click="vshoot($event)" class="celda" :id="'s'+item+5"></td>
+                        <td v-on:click="vshoot($event)" class="celda" :id="'s'+item+6"></td>
+                        <td v-on:click="vshoot($event)" class="celda" :id="'s'+item+7"></td>
+                        <td v-on:click="vshoot($event)" class="celda" :id="'s'+item+8"></td>
+                        <td v-on:click="vshoot($event)" class="celda" :id="'s'+item+9"></td>
+                        <td v-on:click="vshoot($event)" class="celda" :id="'s'+item+10"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-2.2.0.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+<script src="script/dist/jquery-ui.min.js"></script>
+<script src="script/dist/gridstack.js"></script>
+<script src="script/dist/gridstack.jQueryUI.js"></script>
+<script src="script/dist/jquery.ui.touch-punch.min.js"></script>
+
+<script src="game.js"></script>
+
+
+</body>
+
+</html>

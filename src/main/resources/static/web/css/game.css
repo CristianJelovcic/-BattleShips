@@ -1,0 +1,66 @@
+.gameboard{
+    position: absolute;
+    /* margin: 30px; */
+    border: solid black 3px;
+}
+.gameboardSize{
+    width: 450px;
+    height: 450px;
+}
+.celda {
+    background-color: skyblue;
+    width: 45px;
+    height: 45px; !important;
+}
+
+.salvosHits {
+    background-image: url("../img/hit3.gif");
+    background-color: skyblue;
+    z-index: 50 !important;
+    color: mediumvioletred;
+    text-align: center;
+    font-size: x-small;
+    font-weight: bolder;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 45px;
+    height: 45px !important;
+    padding: 0px; !important;
+}
+
+.salvos {
+    color: red;
+    text-align: left;
+    font-size: x-small;
+    background-image: url('../img/pngfuel.png');
+    background-color:skyblue;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 45px;
+    height: 45px !important;
+    padding: 0px; !important;
+}
+
+.ship {
+    background-color: royalblue;
+}
+
+#player {
+    background-color: chartreuse;
+}
+
+#opponent {
+    background-color: palevioletred;
+}
+
+#ships {
+    background-color: skyblue;
+}
+#history{
+    position: absolute;
+    top: 800px;
+    z-index: 2;
+}
+
