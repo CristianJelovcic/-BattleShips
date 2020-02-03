@@ -23,7 +23,7 @@
 <div id="app" class="container-fluid">
     <div class="d-flex justify-content-center"><h1>BATTLESHIP GAME</h1></div>
     <div class="row mt-2">
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">Game State:
             <strong>{{game_state}}</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -77,7 +77,7 @@
                 <tr>
                     <th>Turn</th>
                     <th>Hits</th>
-                    <th>skins</th>
+                    <th>Sinks</th>
                 </tr>
                 <tr v-for="item in hitsTable">
                     <td>{{item.turn}}</td>
@@ -94,7 +94,7 @@
                 <tr>
                     <th>Turn</th>
                     <th>Hits</th>
-                    <th>skins</th>
+                    <th>Sinks</th>
                 </tr>
                 <tr v-for="item in hitsTableOpp">
                     <td>{{item.turn}}</td>
